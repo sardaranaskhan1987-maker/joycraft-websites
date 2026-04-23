@@ -27,7 +27,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           console.error("sitemap blog fetch failed", e);
         }
 
-        const urls = [
+        const urls: { loc: string; lastmod?: string }[] = [
           ...staticPaths.map((p) => ({ loc: `${SITE_URL}${p}` })),
           ...postUrls,
         ];
