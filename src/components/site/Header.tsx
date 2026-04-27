@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 
-type NavLink = { to: string; label: string; description?: string };
+type NavLink = { to: string; hash?: string; label: string; description?: string };
 type NavItem =
   | { type: "link"; to: string; label: string }
   | { type: "menu"; label: string; columns: { heading: string; links: NavLink[] }[] };
@@ -16,17 +16,17 @@ const nav: NavItem[] = [
       {
         heading: "Tax & Governance",
         links: [
-          { to: "/services", label: "Corporate Tax & VAT Governance", description: "Readiness, exposure mapping & controls" },
-          { to: "/services", label: "Cross-Border & Corporate Structuring", description: "UAE & international expansion" },
-          { to: "/services", label: "Financial Risk & Tax Diagnostic", description: "Short-duration focused review" },
+          { to: "/services", hash: "corporate-tax", label: "Corporate Tax & VAT Governance", description: "Readiness, exposure mapping & controls" },
+          { to: "/services", hash: "cross-border", label: "Cross-Border & Corporate Structuring", description: "UAE & international expansion" },
+          { to: "/services", hash: "risk-diagnostic", label: "Financial Risk & Tax Diagnostic", description: "Short-duration focused review" },
         ],
       },
       {
         heading: "Oversight & Advisory",
         links: [
-          { to: "/services", label: "Fractional CFO & Oversight", description: "Senior financial support on retainer" },
-          { to: "/services", label: "Independent Oversight Assessment™", description: "PRISM™ governance review" },
-          { to: "/services", label: "Personal Wealth Risk Review™", description: "Capital risk clarity for individuals" },
+          { to: "/services", hash: "fractional-cfo", label: "Fractional CFO & Oversight", description: "Senior financial support on retainer" },
+          { to: "/services", hash: "oversight-assessment", label: "Independent Oversight Assessment™", description: "PRISM™ governance review" },
+          { to: "/services", hash: "wealth-review", label: "Personal Wealth Risk Review™", description: "Capital risk clarity for individuals" },
         ],
       },
     ],
@@ -121,6 +121,7 @@ export function Header() {
                               <li key={l.label}>
                                 <Link
                                   to={l.to}
+                                  hash={l.hash}
                                   onClick={close}
                                   className="block group"
                                 >
@@ -195,6 +196,7 @@ export function Header() {
                               <li key={l.label}>
                                 <Link
                                   to={l.to}
+                                  hash={l.hash}
                                   onClick={close}
                                   className="block py-1 text-sm text-navy"
                                 >

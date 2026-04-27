@@ -1,63 +1,35 @@
 
-# Plan: Convert HTML site → multi-page TanStack site with Contact Form, Blog & Admin
+# Fix slow loading & broken Services dropdown links
 
-## Site structure (separate routes for SEO)
-Convert the single HTML page into proper routes, each with its own `head()` (title, description, og:title, og:description, og:image where a hero image exists):
-- `/` — Home (hero, highlights, CTA)
-- `/about` — About / firm overview
-- `/services` — Services offered
-- `/insights` — Insights overview
-- `/blog` — Blog listing (NEW)
-- `/blog/$slug` — Blog post detail (NEW)
-- `/contact` — Contact form + WhatsApp + email
-- `/auth` — Sign in (for admin)
-- `/admin` — Admin dashboard (protected)
-- `/admin/blog/new` and `/admin/blog/$id/edit` — Create/edit blog posts
+## What's actually wrong
 
-Shared header + footer in `__root.tsx` with `<Link>` navigation. Sitemap.xml route for SEO.
+The site itself is fine — the dev server is running cleanly with no runtime errors. Two real issues:
 
-## Contact form → Google Sheets + WhatsApp
-- Fields: Name, Email, Phone, Subject, Message (validated with Zod, length limits, trimmed).
-- Submission goes through a server function that:
-  1. Inserts the row into a Google Sheet (using Google Sheets connector, owned by **sardaranaskhan1987@gmail.com**).
-  2. Saves a copy to the database for admin viewing.
-- Floating **WhatsApp button** site-wide → opens `https://wa.me/971585898224` with prefilled message.
-- Contact page also shows the WhatsApp number and email as click-to-action buttons.
+1. **Dropdown links go to the wrong place.** Every Services sub-menu item (Corporate Tax, Cross-Border, Fractional CFO, etc.) currently points to `/services` with no anchor, so clicking any of them just lands on the top of the same long page — it looks like "nothing happened."
+2. **Apparent slowness** — likely the perceived effect of the above (you click, the page seems unchanged) plus heavy first-load (Google Fonts + large blog detail bundle). I'll cut the obvious bloat.
 
-> You'll be prompted to connect the Google Sheets connector with the sardaranaskhan1987@gmail.com account, and to specify (or auto-create) the target spreadsheet.
+## Fixes
 
-## Blog with admin access
-**Backend (Lovable Cloud):**
-- `profiles` table (auto-created on signup)
-- `user_roles` table + `app_role` enum (`admin`, `user`) + `has_role()` security-definer function (per security best practices — roles never on profiles)
-- `blog_posts` table: id, slug, title, excerpt, content (markdown/rich text), cover_image_url, author_id, published, published_at, created_at, updated_at
-- `contact_submissions` table for storing form entries
-- Storage bucket `blog-images` (public read) for cover/inline images
-- RLS:
-  - Public can read `published = true` posts
-  - Only admins can insert/update/delete posts and view contact submissions
+**Anchor each service section on `/services`**
+Add `id="..."` and `scroll-mt-28` (so the sticky header doesn't cover the heading) to each section:
+- `#corporate-tax`, `#fractional-cfo`, `#cross-border`, `#risk-diagnostic`, `#oversight-assessment`, `#wealth-review`
 
-**Auth:** Email + password sign-in at `/auth`. First admin promoted manually via SQL note shown after signup (or you give me a specific email to seed as admin).
+**Wire the dropdown to those anchors**
+In `Header.tsx`, give each service link a `hash` and pass it through to `<Link to=... hash=...>` so the URL becomes `/services#corporate-tax` and the browser scrolls to that section. Same for desktop and mobile menus.
 
-**Admin UI (`/admin`, protected via `_authenticated` + admin role guard):**
-- List of all blog posts with edit/delete/publish toggle
-- Rich post editor: title, slug (auto from title), excerpt, cover image upload, content editor, publish toggle
-- Inline image upload to Storage
-- Contact submissions inbox (read-only list)
+**Performance polish**
+- Self-host or `display=swap` is already set for fonts; preconnect is already in place — keep it but drop the `Cormorant Garamond` weight 700 (we don't use it) to lighten the font payload.
+- The blog detail route is the largest chunk (markdown renderer ~410 kB). Move `react-markdown` + `remark-gfm` behind `React.lazy` so it only loads when a blog post page opens, not on every page.
+- Remove the unused `tw-animate-css` import (if no animations rely on it) — small CSS win.
 
-**Public blog:**
-- `/blog` — grid of published posts with cover image, title, excerpt, date
-- `/blog/$slug` — full post; `head()` derives title/description/og:image from the post (great social previews)
+**Smooth scroll for hash navigation**
+Already enabled globally via `html { scroll-behavior: smooth }` in `styles.css`. Verify it stays.
 
-## SEO essentials (best practices)
-- Per-route `head()` with unique title, description, og:title, og:description, twitter card tags
-- og:image set on routes with hero/cover images (blog posts use their cover)
-- Semantic HTML (`<article>`, `<header>`, `<nav>`, `<main>`)
-- JSON-LD structured data: `Organization` on home, `Article` on blog posts
-- `/sitemap.xml` server route listing all static routes + published blog posts
-- `/robots.txt` allowing crawl, pointing to sitemap
-- Canonical link tags, lang attribute, descriptive alt text on all images
-- Fast LCP via image lazy-loading + responsive images
+## Files touched
 
-## Design
-Faithful to the uploaded `!DOCTYPE_VII.html` look (cream background `#fcfbf8`, serif headings, professional law-firm aesthetic). Built with Tailwind + shadcn components, fully responsive.
+- `src/routes/services.tsx` — add section IDs and `scroll-mt-28`
+- `src/components/site/Header.tsx` — add `hash` to service nav items, pass to `<Link>` (both desktop & mobile)
+- `src/routes/blog.$slug.tsx` — lazy-load markdown renderer
+- `src/styles.css` — drop unused font weight (minor)
+
+After: clicking "Cross-Border & Corporate Structuring" in the dropdown will jump straight to that section on the services page; first-page navigation will feel noticeably snappier.
