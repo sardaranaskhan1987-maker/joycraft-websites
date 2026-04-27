@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 
-const PHONE = "971585898224";
+const PHONE = "447721991757";
 
 export function WhatsAppButton({
   message = "Hello Bizness Doctor, I'd like to discuss an advisory enquiry.",
