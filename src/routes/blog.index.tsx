@@ -1,6 +1,6 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { createClient } from "@supabase/supabase-js";
 
 const SITE_URL = "https://biznessdoctor.com";
 
@@ -13,6 +13,26 @@ interface PostListItem {
   published_at: string | null;
   created_at: string;
 }
+
+export const fetchPublishedPosts = createServerFn({ method: "GET" }).handler(
+  async (): Promise<PostListItem[]> => {
+    const SUPABASE_URL = process.env.SUPABASE_URL!;
+    const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+    const admin = createClient(SUPABASE_URL, SERVICE_ROLE, {
+      auth: { persistSession: false },
+    });
+    const { data, error } = await admin
+      .from("blog_posts")
+      .select("id, slug, title, excerpt, cover_image_url, published_at, created_at")
+      .eq("published", true)
+      .order("published_at", { ascending: false });
+    if (error) {
+      console.error("fetchPublishedPosts error", error);
+      return [];
+    }
+    return (data ?? []) as PostListItem[];
+  },
+);
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -31,29 +51,18 @@ export const Route = createFileRoute("/blog/")({
     ],
     links: [{ rel: "canonical", href: SITE_URL + "/blog" }],
   }),
+  loader: async () => ({ posts: await fetchPublishedPosts() }),
+  errorComponent: ({ error }) => (
+    <div className="container-narrow py-20 text-center">
+      <h1 className="text-2xl font-serif">Couldn't load articles</h1>
+      <p className="text-sm text-muted-foreground mt-2">{error.message}</p>
+    </div>
+  ),
   component: BlogIndex,
 });
 
 function BlogIndex() {
-  const [posts, setPosts] = useState<PostListItem[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    supabase
-      .from("blog_posts")
-      .select("id, slug, title, excerpt, cover_image_url, published_at, created_at")
-      .eq("published", true)
-      .order("published_at", { ascending: false })
-      .then(({ data, error }) => {
-        if (!active) return;
-        if (error) setError(error.message);
-        else setPosts((data ?? []) as PostListItem[]);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
+  const { posts } = Route.useLoaderData();
 
   return (
     <div className="container-narrow py-16">
@@ -66,12 +75,10 @@ function BlogIndex() {
       </header>
 
       <div className="mt-12">
-        {error && <p className="text-sm text-destructive">Failed to load posts: {error}</p>}
-        {posts === null && !error && <p className="text-muted-foreground">Loading…</p>}
-        {posts && posts.length === 0 && (
+        {posts.length === 0 && (
           <p className="text-muted-foreground">No posts yet — check back soon.</p>
         )}
-        {posts && posts.length > 0 && (
+        {posts.length > 0 && (
           <div className="grid md:grid-cols-3 gap-6">
             {posts.map((p) => (
               <Link
@@ -92,7 +99,9 @@ function BlogIndex() {
                 )}
                 <div className="p-5">
                   <h2 className="text-lg font-serif group-hover:text-navy">{p.title}</h2>
-                  {p.excerpt && <p className="text-sm text-muted-foreground mt-2 line-clamp-3">{p.excerpt}</p>}
+                  {p.excerpt && (
+                    <p className="text-sm text-muted-foreground mt-2 line-clamp-3">{p.excerpt}</p>
+                  )}
                   <p className="text-xs text-muted-foreground mt-3">
                     {(p.published_at ?? p.created_at) &&
                       new Date(p.published_at ?? p.created_at).toLocaleDateString(undefined, {
