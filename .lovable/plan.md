@@ -1,35 +1,36 @@
 
-# Fix slow loading & broken Services dropdown links
+# Speed up the site
 
-## What's actually wrong
+## Where the slowness is coming from
 
-The site itself is fine — the dev server is running cleanly with no runtime errors. Two real issues:
+Looking at the live site, three things are slowing every page load:
 
-1. **Dropdown links go to the wrong place.** Every Services sub-menu item (Corporate Tax, Cross-Border, Fractional CFO, etc.) currently points to `/services` with no anchor, so clicking any of them just lands on the top of the same long page — it looks like "nothing happened."
-2. **Apparent slowness** — likely the perceived effect of the above (you click, the page seems unchanged) plus heavy first-load (Google Fonts + large blog detail bundle). I'll cut the obvious bloat.
+1. **No link preloading.** Right now, when you click a nav item, the browser waits to download that route's code + data before showing anything. TanStack Router supports preloading on hover, but it's not turned on.
+2. **Heavy Google Fonts payload.** We're loading 4 weights of Inter and 3 weights of Cormorant Garamond — but the design only uses 2 of each. The font CSS is also render-blocking.
+3. **Blog index waits to fetch posts client-side.** The list query starts only after the page renders, so users see "Loading…" briefly even when the data is tiny. We can move this into a route loader so SSR delivers the posts pre-rendered.
 
 ## Fixes
 
-**Anchor each service section on `/services`**
-Add `id="..."` and `scroll-mt-28` (so the sticky header doesn't cover the heading) to each section:
-- `#corporate-tax`, `#fractional-cfo`, `#cross-border`, `#risk-diagnostic`, `#oversight-assessment`, `#wealth-review`
+**Preload routes on hover (biggest perceived-speed win)**
+In `src/router.tsx`, add `defaultPreload: "intent"`. Now hovering "Services", "Blog", or "Contact" for ~50ms downloads that route in the background, so the click is essentially instant.
 
-**Wire the dropdown to those anchors**
-In `Header.tsx`, give each service link a `hash` and pass it through to `<Link to=... hash=...>` so the URL becomes `/services#corporate-tax` and the browser scrolls to that section. Same for desktop and mobile menus.
+**Trim Google Fonts**
+In `src/routes/__root.tsx`, change the font URL from
+`Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700`
+to
+`Cormorant+Garamond:wght@600&family=Inter:wght@400;600`.
+This roughly halves font bytes and cuts a chunk of render-blocking CSS time.
 
-**Performance polish**
-- Self-host or `display=swap` is already set for fonts; preconnect is already in place — keep it but drop the `Cormorant Garamond` weight 700 (we don't use it) to lighten the font payload.
-- The blog detail route is the largest chunk (markdown renderer ~410 kB). Move `react-markdown` + `remark-gfm` behind `React.lazy` so it only loads when a blog post page opens, not on every page.
-- Remove the unused `tw-animate-css` import (if no animations rely on it) — small CSS win.
+**SSR the blog list**
+In `src/routes/blog.index.tsx`, replace the `useEffect`+`useState` Supabase call with a `createServerFn` loader that fetches published posts with the admin client (already used elsewhere). The page then arrives fully rendered instead of flashing "Loading…".
 
-**Smooth scroll for hash navigation**
-Already enabled globally via `html { scroll-behavior: smooth }` in `styles.css`. Verify it stays.
+**Lighten the homepage Open Graph image reference**
+The `og:image` in `__root.tsx` points to a 1.7 MB Lovable preview screenshot. It's only used by social cards — but having such a large image referenced from every page hurts when scrapers/preview tools pull it. Remove it from the root `head()` (per the route-architecture rule, root shouldn't carry an og:image anyway since it pollutes every page) and let individual routes set their own when they have a hero image worth sharing.
 
 ## Files touched
 
-- `src/routes/services.tsx` — add section IDs and `scroll-mt-28`
-- `src/components/site/Header.tsx` — add `hash` to service nav items, pass to `<Link>` (both desktop & mobile)
-- `src/routes/blog.$slug.tsx` — lazy-load markdown renderer
-- `src/styles.css` — drop unused font weight (minor)
+- `src/router.tsx` — add `defaultPreload: "intent"`
+- `src/routes/__root.tsx` — trim font weights, remove root-level og:image/twitter:image
+- `src/routes/blog.index.tsx` — convert to SSR loader via `createServerFn`
 
-After: clicking "Cross-Border & Corporate Structuring" in the dropdown will jump straight to that section on the services page; first-page navigation will feel noticeably snappier.
+After these changes: hovering a nav item warms the next page so clicks feel instant; first paint is faster because the font payload is smaller; the blog page renders with content already in place.
