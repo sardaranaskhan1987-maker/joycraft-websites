@@ -1,9 +1,20 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { lazy, Suspense } from "react";
 import { z } from "zod";
+
+const Markdown = lazy(async () => {
+  const [{ default: ReactMarkdown }, { default: remarkGfm }] = await Promise.all([
+    import("react-markdown"),
+    import("remark-gfm"),
+  ]);
+  return {
+    default: ({ children }: { children: string }) => (
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{children}</ReactMarkdown>
+    ),
+  };
+});
 
 const SITE_URL = "https://biznessdoctor.com";
 
@@ -132,7 +143,9 @@ function PostPage() {
         />
       )}
       <div className="prose-blog mt-8">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        <Suspense fallback={<div className="text-sm text-muted-foreground">Loading article…</div>}>
+          <Markdown>{post.content}</Markdown>
+        </Suspense>
       </div>
     </article>
   );
