@@ -108,6 +108,8 @@
     font-family: var(--font-serif);
     color: var(--color-navy);
     letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 }
 
