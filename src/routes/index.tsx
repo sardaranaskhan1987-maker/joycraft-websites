@@ -72,13 +72,13 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container-narrow py-16 md:py-24 grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
+      <section className="container-narrow py-12 md:py-20 grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
         <div>
           <span className="eyebrow">Independent Advisory</span>
-          <h1 className="mt-4 text-5xl md:text-6xl font-serif leading-[1.05] max-w-[14ch]">
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-serif leading-[1.15] tracking-tight">
             Financial Governance &amp; Risk Structuring Advisory
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
+          <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-2xl">
             Independent advisory for businesses and high-income professionals seeking clarity on
             corporate structure, tax exposure, financial oversight, and capital risk across the UAE
             — including cross-border structuring for international and Australian businesses
@@ -138,7 +138,7 @@ function HomePage() {
       {/* Positioning */}
       <section className="container-narrow py-16">
         <div className="max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-serif">
+          <h2 className="text-2xl md:text-3xl font-serif leading-snug">
             Independent Financial Governance. Not Accounting. Not Product Sales.
           </h2>
           <p className="text-lg text-muted-foreground mt-4">
@@ -162,7 +162,7 @@ function HomePage() {
       <section className="bg-navy text-primary-foreground">
         <div className="container-narrow py-14 grid md:grid-cols-[1fr_auto] gap-6 items-center">
           <div>
-            <h2 className="text-3xl font-serif text-primary-foreground">
+            <h2 className="text-2xl md:text-3xl font-serif text-primary-foreground leading-snug">
               Discuss your situation with structured clarity.
             </h2>
             <p className="text-primary-foreground/80 mt-2">

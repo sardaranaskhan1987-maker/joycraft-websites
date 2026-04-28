@@ -131,7 +131,7 @@ function PostPage() {
     <article className="container-narrow py-16 max-w-3xl">
       <Link to="/blog" className="text-sm text-muted-foreground hover:text-navy">← Back to Blog</Link>
       <header className="mt-6">
-        <h1 className="text-4xl md:text-5xl font-serif">{post.title}</h1>
+        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight">{post.title}</h1>
         <p className="text-sm text-muted-foreground mt-3">{date}</p>
         {post.excerpt && <p className="text-lg text-muted-foreground mt-4">{post.excerpt}</p>}
       </header>
