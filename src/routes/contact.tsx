@@ -246,6 +246,19 @@ function ContactPage() {
                 ))}
               </select>
             </div>
+            <div>
+              <label className="block text-xs font-medium mb-1" htmlFor="c-tz">Timezone</label>
+              <select
+                id="c-tz"
+                value={bookingTimezone}
+                onChange={(e) => setBookingTimezone(e.target.value)}
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+              >
+                {TIMEZONES.map((tz) => (
+                  <option key={tz} value={tz}>{tz.replace(/_/g, " ")}</option>
+                ))}
+              </select>
+            </div>
             <p className="text-xs text-muted-foreground">
               Mon–Fri, 30-minute slots. We'll confirm by email.
             </p>
