@@ -49,17 +49,26 @@ const Schema = z.object({
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [bookingDate, setBookingDate] = useState<Date | undefined>();
+  const [bookingTime, setBookingTime] = useState<string>("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
+    const baseMessage = (fd.get("message") as string) ?? "";
+    const bookingLine =
+      bookingDate && bookingTime
+        ? `[Requested call slot: ${format(bookingDate, "EEEE, d MMMM yyyy")} at ${bookingTime}]\n\n`
+        : "";
+    const finalMessage = bookingLine + baseMessage;
+
     const parsed = Schema.safeParse({
       name: fd.get("name"),
       email: fd.get("email"),
       phone: fd.get("phone") || undefined,
       subject: fd.get("subject") || undefined,
-      message: fd.get("message"),
+      message: finalMessage,
     });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Please check the form");
