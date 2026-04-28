@@ -16,6 +16,38 @@ const TIME_SLOTS = [
   "16:00", "16:30", "17:00", "17:30",
 ];
 
+const TIMEZONES = [
+  "Europe/London",
+  "Europe/Dublin",
+  "Europe/Paris",
+  "Europe/Berlin",
+  "Europe/Madrid",
+  "Europe/Zurich",
+  "Europe/Istanbul",
+  "Asia/Dubai",
+  "Asia/Riyadh",
+  "Asia/Karachi",
+  "Asia/Kolkata",
+  "Asia/Singapore",
+  "Asia/Hong_Kong",
+  "Asia/Tokyo",
+  "Australia/Sydney",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Los_Angeles",
+  "America/Sao_Paulo",
+  "UTC",
+];
+
+function getDefaultTimezone(): string {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz) return tz;
+  } catch {}
+  return "Europe/London";
+}
+
 const SITE_URL = "https://biznessdoctor.com";
 
 export const Route = createFileRoute("/contact")({
@@ -51,6 +83,7 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [bookingDate, setBookingDate] = useState<Date | undefined>();
   const [bookingTime, setBookingTime] = useState<string>("");
+  const [bookingTimezone, setBookingTimezone] = useState<string>(getDefaultTimezone);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,7 +92,7 @@ function ContactPage() {
     const baseMessage = (fd.get("message") as string) ?? "";
     const bookingLine =
       bookingDate && bookingTime
-        ? `[Requested call slot: ${format(bookingDate, "EEEE, d MMMM yyyy")} at ${bookingTime}]\n\n`
+        ? `[Requested call slot: ${format(bookingDate, "EEEE, d MMMM yyyy")} at ${bookingTime} (${bookingTimezone})]\n\n`
         : "";
     const finalMessage = bookingLine + baseMessage;
 
@@ -81,6 +114,7 @@ function ContactPage() {
       form.reset();
       setBookingDate(undefined);
       setBookingTime("");
+      setBookingTimezone(getDefaultTimezone());
       toast.success("Thank you — we'll be in touch shortly.");
     } catch (err) {
       console.error(err);
@@ -209,6 +243,19 @@ function ContactPage() {
                 <option value="">Pick a time</option>
                 {TIME_SLOTS.map((t) => (
                   <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-1" htmlFor="c-tz">Timezone</label>
+              <select
+                id="c-tz"
+                value={bookingTimezone}
+                onChange={(e) => setBookingTimezone(e.target.value)}
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+              >
+                {TIMEZONES.map((tz) => (
+                  <option key={tz} value={tz}>{tz.replace(/_/g, " ")}</option>
                 ))}
               </select>
             </div>
