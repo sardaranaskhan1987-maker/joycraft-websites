@@ -79,6 +79,8 @@ function ContactPage() {
       await submitContact({ data: parsed.data });
       setSubmitted(true);
       form.reset();
+      setBookingDate(undefined);
+      setBookingTime("");
       toast.success("Thank you — we'll be in touch shortly.");
     } catch (err) {
       console.error(err);
