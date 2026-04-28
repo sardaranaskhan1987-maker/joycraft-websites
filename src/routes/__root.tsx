@@ -1,8 +1,8 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
-import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 
@@ -52,7 +52,7 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
+function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -75,9 +75,45 @@ function RootComponent() {
       </main>
       <Footer />
       <WhatsAppButton />
-      <Toaster richColors position="top-center" />
+      <DeferredToaster />
     </div>
   );
+}
+
+function DeferredToaster() {
+  const [ToasterComponent, setToasterComponent] = useState<ComponentType<{
+    richColors?: boolean;
+    position?: "top-center";
+  }> | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    const load = () => {
+      import("@/components/ui/sonner").then(({ Toaster }) => {
+        if (mounted) setToasterComponent(() => Toaster);
+      });
+    };
+    const win = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(load, { timeout: 2000 });
+      return () => {
+        mounted = false;
+        win.cancelIdleCallback?.(id);
+      };
+    }
+
+    const id = window.setTimeout(load, 1000);
+    return () => {
+      mounted = false;
+      window.clearTimeout(id);
+    };
+  }, []);
+
+  return ToasterComponent ? <ToasterComponent richColors position="top-center" /> : null;
 }
 
 export { SITE_URL };
