@@ -42,7 +42,7 @@ function InsightsPage() {
     <div className="container-narrow py-16">
       <header className="max-w-3xl">
         <span className="eyebrow">Insights</span>
-        <h1 className="text-4xl md:text-5xl font-serif mt-4">
+        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">
           Practical, governance-led commentary on tax, financial control, structuring &amp; capital risk.
         </h1>
         <p className="text-lg text-muted-foreground mt-4">

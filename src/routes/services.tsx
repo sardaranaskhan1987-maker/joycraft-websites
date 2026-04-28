@@ -28,7 +28,7 @@ function ServicesPage() {
     <div className="container-narrow py-16 space-y-10">
       <header className="max-w-3xl">
         <span className="eyebrow">Services</span>
-        <h1 className="text-4xl md:text-5xl font-serif mt-4">
+        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">
           Areas of advisory covering tax, oversight, governance, and capital risk.
         </h1>
       </header>

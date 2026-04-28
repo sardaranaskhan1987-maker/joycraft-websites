@@ -72,7 +72,7 @@ function ContactPage() {
     <div className="container-narrow py-16 max-w-4xl">
       <header className="max-w-2xl">
         <span className="eyebrow">Contact</span>
-        <h1 className="text-4xl md:text-5xl font-serif mt-4">Book a 15-Minute Fit Call</h1>
+        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">Book a 15-Minute Fit Call</h1>
         <p className="text-lg text-muted-foreground mt-4">
           Initial discussions are focused on understanding whether your situation requires structured
           financial advisory, tax governance review, or ongoing financial oversight.
