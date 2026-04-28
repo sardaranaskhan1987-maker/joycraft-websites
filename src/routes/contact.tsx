@@ -16,6 +16,38 @@ const TIME_SLOTS = [
   "16:00", "16:30", "17:00", "17:30",
 ];
 
+const TIMEZONES = [
+  "Europe/London",
+  "Europe/Dublin",
+  "Europe/Paris",
+  "Europe/Berlin",
+  "Europe/Madrid",
+  "Europe/Zurich",
+  "Europe/Istanbul",
+  "Asia/Dubai",
+  "Asia/Riyadh",
+  "Asia/Karachi",
+  "Asia/Kolkata",
+  "Asia/Singapore",
+  "Asia/Hong_Kong",
+  "Asia/Tokyo",
+  "Australia/Sydney",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Los_Angeles",
+  "America/Sao_Paulo",
+  "UTC",
+];
+
+function getDefaultTimezone(): string {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz) return tz;
+  } catch {}
+  return "Europe/London";
+}
+
 const SITE_URL = "https://biznessdoctor.com";
 
 export const Route = createFileRoute("/contact")({
