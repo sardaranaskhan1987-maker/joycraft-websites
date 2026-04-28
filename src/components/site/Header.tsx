@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, type SVGProps } from "react";
 
 type NavLink = { to: string; hash?: string; label: string; description?: string };
 type NavItem =
@@ -72,7 +71,7 @@ export function Header() {
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? <XIcon className="size-5" /> : <MenuIcon className="size-5" />}
         </button>
 
         {/* Desktop nav */}
@@ -102,7 +101,7 @@ export function Header() {
                   aria-expanded={openMenu === item.label}
                 >
                   {item.label}
-                  <ChevronDown className="size-3.5" />
+                  <ChevronDownIcon className="size-3.5" />
                 </button>
                 {openMenu === item.label && (
                   <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50">
@@ -180,7 +179,7 @@ export function Header() {
                     className="w-full flex items-center justify-between py-1 text-muted-foreground"
                   >
                     <span>{item.label}</span>
-                    <ChevronDown
+                    <ChevronDownIcon
                       className={`size-4 transition-transform ${openMenu === item.label ? "rotate-180" : ""}`}
                     />
                   </button>
@@ -223,5 +222,32 @@ export function Header() {
         </nav>
       )}
     </header>
+  );
+}
+
+function MenuIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M4 6h16" />
+      <path d="M4 12h16" />
+      <path d="M4 18h16" />
+    </svg>
+  );
+}
+
+function XIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
   );
 }
