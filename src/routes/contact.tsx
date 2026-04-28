@@ -69,7 +69,7 @@ function ContactPage() {
   }
 
   return (
-    <div className="container-narrow py-16 max-w-4xl">
+    <div className="container-narrow py-10 max-w-4xl">
       <header className="max-w-2xl">
         <span className="eyebrow">Contact</span>
         <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">Book a 15-Minute Fit Call</h1>
@@ -79,7 +79,7 @@ function ContactPage() {
         </p>
       </header>
 
-      <div className="mt-10 grid md:grid-cols-[1fr_1fr] gap-6">
+      <div className="mt-6 grid md:grid-cols-[1fr_1fr] gap-6">
         {/* Direct contact */}
         <div className="rounded-xl border border-border bg-card p-6 space-y-4">
           <h2 className="text-xl font-serif">Direct Enquiry</h2>

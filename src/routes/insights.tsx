@@ -39,7 +39,7 @@ export const Route = createFileRoute("/insights")({
 
 function InsightsPage() {
   return (
-    <div className="container-narrow py-16">
+    <div className="container-narrow py-10">
       <header className="max-w-3xl">
         <span className="eyebrow">Insights</span>
         <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">

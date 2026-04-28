@@ -24,7 +24,7 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <article className="container-narrow py-16">
+    <article className="container-narrow py-10">
       <header className="max-w-3xl">
         <span className="eyebrow">About Bizness Doctor</span>
         <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">Independent. Structured. Decision-Focused.</h1>
