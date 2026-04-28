@@ -72,7 +72,7 @@ function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container-narrow py-12 md:py-20 grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
+      <section className="container-narrow py-8 md:py-12 grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
         <div>
           <span className="eyebrow">Independent Advisory</span>
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-serif leading-[1.15] tracking-tight">
@@ -98,7 +98,7 @@ function HomePage() {
               Explore Services
             </Link>
           </div>
-          <div className="mt-10 grid sm:grid-cols-2 gap-3">
+          <div className="mt-6 grid sm:grid-cols-2 gap-3">
             {trust.map((t) => (
               <div key={t} className="text-sm text-muted-foreground border-l-2 border-accent pl-3">
                 {t}
@@ -136,7 +136,7 @@ function HomePage() {
       </section>
 
       {/* Positioning */}
-      <section className="container-narrow py-16">
+      <section className="container-narrow py-10">
         <div className="max-w-3xl">
           <h2 className="text-2xl md:text-3xl font-serif leading-snug">
             Independent Financial Governance. Not Accounting. Not Product Sales.
@@ -148,7 +148,7 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="mt-10 grid md:grid-cols-3 gap-5">
+        <div className="mt-6 grid md:grid-cols-3 gap-5">
           {positioning.map((p) => (
             <div key={p.title} className="rounded-xl border border-border bg-card p-6">
               <h3 className="text-xl font-serif">{p.title}</h3>
@@ -160,7 +160,7 @@ function HomePage() {
 
       {/* CTA strip */}
       <section className="bg-navy text-primary-foreground">
-        <div className="container-narrow py-14 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+        <div className="container-narrow py-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
           <div>
             <h2 className="text-2xl md:text-3xl font-serif text-primary-foreground leading-snug">
               Discuss your situation with structured clarity.
