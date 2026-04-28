@@ -167,6 +167,55 @@ function ContactPage() {
             <label className="block text-sm font-medium mb-1" htmlFor="c-subject">Subject <span className="text-muted-foreground font-normal">(optional)</span></label>
             <input id="c-subject" name="subject" maxLength={200} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
           </div>
+          <div className="rounded-md border border-border p-3 space-y-3">
+            <p className="text-sm font-medium">Preferred call slot <span className="text-muted-foreground font-normal">(optional)</span></p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !bookingDate && "text-muted-foreground",
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {bookingDate ? format(bookingDate, "PPP") : "Pick a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={bookingDate}
+                    onSelect={setBookingDate}
+                    disabled={(date) => {
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0);
+                      const day = date.getDay();
+                      return date < today || day === 0 || day === 6;
+                    }}
+                    initialFocus
+                    className={cn("p-3 pointer-events-auto")}
+                  />
+                </PopoverContent>
+              </Popover>
+              <select
+                value={bookingTime}
+                onChange={(e) => setBookingTime(e.target.value)}
+                disabled={!bookingDate}
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm disabled:opacity-60"
+              >
+                <option value="">Pick a time</option>
+                {TIME_SLOTS.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Mon–Fri, 30-minute slots. We'll confirm by email.
+            </p>
+          </div>
           <div>
             <label className="block text-sm font-medium mb-1" htmlFor="c-msg">Message</label>
             <textarea id="c-msg" name="message" required maxLength={5000} rows={5} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
