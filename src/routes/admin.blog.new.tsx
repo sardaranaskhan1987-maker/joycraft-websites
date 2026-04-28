@@ -1,15 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PostEditor } from "@/components/admin/PostEditor";
+import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/blog/new")({
-  component: NewPost,
+  component: lazyRouteComponent(() => import("@/components/pages/AdminNewPostPage"), "AdminNewPostPage"),
 });
-
-function NewPost() {
-  return (
-    <div>
-      <h2 className="text-xl font-serif mb-6">New Blog Post</h2>
-      <PostEditor />
-    </div>
-  );
-}

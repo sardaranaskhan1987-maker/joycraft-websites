@@ -32,8 +32,8 @@
   --color-gold: var(--gold);
   --color-cream: var(--cream);
   --color-charcoal: var(--charcoal);
-  --font-serif: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -107,7 +107,7 @@
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
     color: var(--color-navy);
-    letter-spacing: -0.015em;
+    letter-spacing: 0;
     line-height: 1.2;
     text-wrap: balance;
   }
