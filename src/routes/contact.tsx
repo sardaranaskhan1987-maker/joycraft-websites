@@ -83,6 +83,7 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [bookingDate, setBookingDate] = useState<Date | undefined>();
   const [bookingTime, setBookingTime] = useState<string>("");
+  const [bookingTimezone, setBookingTimezone] = useState<string>(getDefaultTimezone);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -91,7 +92,7 @@ function ContactPage() {
     const baseMessage = (fd.get("message") as string) ?? "";
     const bookingLine =
       bookingDate && bookingTime
-        ? `[Requested call slot: ${format(bookingDate, "EEEE, d MMMM yyyy")} at ${bookingTime}]\n\n`
+        ? `[Requested call slot: ${format(bookingDate, "EEEE, d MMMM yyyy")} at ${bookingTime} (${bookingTimezone})]\n\n`
         : "";
     const finalMessage = bookingLine + baseMessage;
 
@@ -113,6 +114,7 @@ function ContactPage() {
       form.reset();
       setBookingDate(undefined);
       setBookingTime("");
+      setBookingTimezone(getDefaultTimezone());
       toast.success("Thank you — we'll be in touch shortly.");
     } catch (err) {
       console.error(err);
