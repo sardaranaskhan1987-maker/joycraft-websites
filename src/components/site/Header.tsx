@@ -23,8 +23,8 @@ const nav: NavItem[] = [
       {
         heading: "Oversight & Advisory",
         links: [
-          { to: "/services", hash: "fractional-cfo", label: "Fractional CFO & Oversight", description: "Senior financial support on retainer" },
           { to: "/services", hash: "oversight-assessment", label: "Independent Oversight Assessment™", description: "PRISM™ governance review" },
+          { to: "/services", hash: "fractional-cfo", label: "Fractional CFO & Oversight", description: "Senior financial support on retainer" },
           { to: "/services", hash: "wealth-review", label: "Personal Wealth Risk Review™", description: "Capital risk clarity for individuals" },
         ],
       },
