@@ -63,7 +63,7 @@ const positioning = [
     body: "For SMEs requiring stronger reporting discipline, cash visibility, and senior decision support.",
   },
   {
-    title: "Independent Risk Review",
+    title: "Independent Financial Review",
     body: "For owners, investors, and professionals seeking disciplined assessment before committing capital.",
   },
 ];
@@ -79,10 +79,10 @@ function HomePage() {
             Financial Governance &amp; Risk Structuring Advisory
           </h1>
           <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-2xl">
-            Independent advisory for businesses and high-income professionals seeking clarity on
-            corporate structure, tax exposure, financial oversight, and capital risk across the UAE
-            — including cross-border structuring for international and Australian businesses
-            entering the UAE market.
+            Independent financial advisory for businesses, investors, and high-income
+            professionals seeking clarity on corporate structure, tax exposure, financial oversight,
+            and capital risk across the UAE and international markets — including strategic support
+            for Australian businesses expanding into the UAE.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -111,14 +111,14 @@ function HomePage() {
           <span className="eyebrow">Why Clients Engage</span>
           <div className="mt-4 space-y-5">
             <div>
-              <h3 className="text-lg font-serif">Before tax exposure becomes costly</h3>
+              <h3 className="text-lg font-serif">Before tax and governance risks become costly</h3>
               <p className="text-sm text-muted-foreground mt-1">
                 When corporate tax readiness, VAT exposure, or governance discipline needs review
                 before problems escalate.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-serif">When financial visibility feels weak</h3>
+              <h3 className="text-lg font-serif">When business decisions require reliable financial visibility</h3>
               <p className="text-sm text-muted-foreground mt-1">
                 When reporting exists, but confidence in numbers, controls, or cash discipline
                 remains limited.
@@ -139,7 +139,7 @@ function HomePage() {
       <section className="container-narrow py-10">
         <div className="max-w-3xl">
           <h2 className="text-2xl md:text-3xl font-serif leading-snug">
-            Independent Financial Governance. Not Accounting. Not Product Sales.
+            Independent Financial Advisory. Not Accounting. Not Product Sales.
           </h2>
           <p className="text-lg text-muted-foreground mt-4">
             Bizness Doctor provides governance-led financial advisory for clients who need
