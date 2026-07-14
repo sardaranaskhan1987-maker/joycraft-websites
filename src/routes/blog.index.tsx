@@ -62,7 +62,7 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndex() {
-  const { posts } = Route.useLoaderData();
+  const { posts }: { posts: PostListItem[] } = Route.useLoaderData();
 
   return (
     <div className="container-narrow py-10">
