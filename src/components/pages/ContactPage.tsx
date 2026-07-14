@@ -3,7 +3,7 @@ import { Mail, Phone, MessageCircle, CalendarIcon } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { submitContact } from "@/server/contact.functions";
+import { submitContact } from "@/lib/contact.functions";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
