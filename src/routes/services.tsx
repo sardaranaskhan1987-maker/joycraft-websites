@@ -57,6 +57,25 @@ function ServicesPage() {
         <Link to="/contact" className="mt-5 inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm text-primary-foreground hover:opacity-90">Assess Tax Exposure</Link>
       </div>
 
+      <div className="grid md:grid-cols-2 gap-5">
+        <div id="cross-border" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
+          <h3 className="text-xl font-serif">Cross-Border &amp; Corporate Structuring</h3>
+          <p className="text-muted-foreground mt-3 text-sm">
+            Support for companies entering, expanding, or reorganizing across UAE and international
+            markets, with focus on structure, tax implications, financial impact, and practical
+            structuring for Australian businesses establishing operations in the UAE.
+          </p>
+        </div>
+        <div id="risk-diagnostic" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
+          <h3 className="text-xl font-serif">UAE Financial Risk &amp; Tax Exposure Diagnostic</h3>
+          <p className="text-muted-foreground mt-3 text-sm">
+            A focused short-duration review for businesses needing early visibility into tax
+            exposure, reporting weaknesses, control gaps, and working capital risk before broader
+            engagement.
+          </p>
+        </div>
+      </div>
+
       <div id="fractional-cfo" className="scroll-mt-28 rounded-xl border border-border bg-secondary p-7">
         <span className="inline-block rounded-full border border-navy/30 text-navy text-xs font-bold px-3 py-1 mb-3">
           Retainer Model
@@ -79,25 +98,6 @@ function ServicesPage() {
           ))}
         </ul>
         <Link to="/contact" className="mt-5 inline-flex items-center rounded-md border border-border bg-card px-4 py-2 text-sm hover:bg-muted">Discuss Retainer Support</Link>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-5">
-        <div id="cross-border" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
-          <h3 className="text-xl font-serif">Cross-Border &amp; Corporate Structuring</h3>
-          <p className="text-muted-foreground mt-3 text-sm">
-            Support for companies entering, expanding, or reorganizing across UAE and international
-            markets, with focus on structure, tax implications, financial impact, and practical
-            structuring for Australian businesses establishing operations in the UAE.
-          </p>
-        </div>
-        <div id="risk-diagnostic" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
-          <h3 className="text-xl font-serif">UAE Financial Risk &amp; Tax Exposure Diagnostic</h3>
-          <p className="text-muted-foreground mt-3 text-sm">
-            A focused short-duration review for businesses needing early visibility into tax
-            exposure, reporting weaknesses, control gaps, and working capital risk before broader
-            engagement.
-          </p>
-        </div>
       </div>
 
       <div id="oversight-assessment" className="scroll-mt-28 rounded-xl bg-navy text-primary-foreground p-7">
