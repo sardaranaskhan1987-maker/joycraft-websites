@@ -1,36 +1,26 @@
+## Set up your blog admin account
 
-# Speed up the site
+I'll create a ready-to-use admin login so you can add, edit, and delete blog posts yourself. The edit and delete controls already exist in the admin dashboard — you just need an account with admin access.
 
-## Where the slowness is coming from
+### Credentials I'll set up
+- **Login URL:** https://joycraft-websites.lovable.app/auth
+- **Email:** `admin@biznessdoctor.com`
+- **Temporary password:** `BiznessDoctor@2026`
 
-Looking at the live site, three things are slowing every page load:
+You should change the password after first login (I can add a "Change password" screen if you'd like).
 
-1. **No link preloading.** Right now, when you click a nav item, the browser waits to download that route's code + data before showing anything. TanStack Router supports preloading on hover, but it's not turned on.
-2. **Heavy Google Fonts payload.** We're loading 4 weights of Inter and 3 weights of Cormorant Garamond — but the design only uses 2 of each. The font CSS is also render-blocking.
-3. **Blog index waits to fetch posts client-side.** The list query starts only after the page renders, so users see "Loading…" briefly even when the data is tiny. We can move this into a route loader so SSR delivers the posts pre-rendered.
+### What you'll be able to do
+Once logged in at `/auth`, you'll be redirected to `/admin` where you can:
+- **Create** new blog posts (title, slug, cover image, markdown content, inline images)
+- **Edit** any existing post
+- **Publish / Unpublish** posts with one click
+- **Delete** posts (with confirmation prompt)
+- View contact form submissions
 
-## Fixes
+### Steps
+1. Create the auth user `admin@biznessdoctor.com` with the password above (email auto-confirmed so you can log in immediately).
+2. Assign the `admin` role to that user in the `user_roles` table so the admin dashboard unlocks.
+3. No code changes needed — the admin UI, edit, and delete features are already built.
 
-**Preload routes on hover (biggest perceived-speed win)**
-In `src/router.tsx`, add `defaultPreload: "intent"`. Now hovering "Services", "Blog", or "Contact" for ~50ms downloads that route in the background, so the click is essentially instant.
-
-**Trim Google Fonts**
-In `src/routes/__root.tsx`, change the font URL from
-`Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700`
-to
-`Cormorant+Garamond:wght@600&family=Inter:wght@400;600`.
-This roughly halves font bytes and cuts a chunk of render-blocking CSS time.
-
-**SSR the blog list**
-In `src/routes/blog.index.tsx`, replace the `useEffect`+`useState` Supabase call with a `createServerFn` loader that fetches published posts with the admin client (already used elsewhere). The page then arrives fully rendered instead of flashing "Loading…".
-
-**Lighten the homepage Open Graph image reference**
-The `og:image` in `__root.tsx` points to a 1.7 MB Lovable preview screenshot. It's only used by social cards — but having such a large image referenced from every page hurts when scrapers/preview tools pull it. Remove it from the root `head()` (per the route-architecture rule, root shouldn't carry an og:image anyway since it pollutes every page) and let individual routes set their own when they have a hero image worth sharing.
-
-## Files touched
-
-- `src/router.tsx` — add `defaultPreload: "intent"`
-- `src/routes/__root.tsx` — trim font weights, remove root-level og:image/twitter:image
-- `src/routes/blog.index.tsx` — convert to SSR loader via `createServerFn`
-
-After these changes: hovering a nav item warms the next page so clicks feel instant; first paint is faster because the font payload is smaller; the blog page renders with content already in place.
+### After approval
+I'll share the final login link + credentials in chat. If you'd prefer a different email or password, tell me and I'll use those instead.
