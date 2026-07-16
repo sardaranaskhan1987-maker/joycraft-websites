@@ -15,7 +15,6 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -34,22 +33,9 @@ function AuthPage() {
     e.preventDefault();
     setBusy(true);
     try {
-      if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: typeof window !== "undefined" ? `${window.location.origin}/admin` : undefined,
-          },
-        });
-        if (error) throw error;
-        toast.success("Account created. You can now sign in.");
-        setMode("signin");
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        toast.success("Signed in");
-      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      toast.success("Signed in");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Authentication failed");
     } finally {
@@ -73,10 +59,7 @@ function AuthPage() {
           <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
         </div>
         <button disabled={busy} className="w-full inline-flex items-center justify-center rounded-md bg-navy px-4 py-2 text-sm text-primary-foreground hover:opacity-90 disabled:opacity-60">
-          {busy ? "Please wait…" : mode === "signin" ? "Sign In" : "Create Account"}
-        </button>
-        <button type="button" onClick={() => setMode((m) => (m === "signin" ? "signup" : "signin"))} className="w-full text-xs text-muted-foreground hover:text-navy">
-          {mode === "signin" ? "Need an account? Sign up" : "Have an account? Sign in"}
+          {busy ? "Please wait…" : "Sign In"}
         </button>
       </form>
       <p className="mt-4 text-xs text-muted-foreground">
