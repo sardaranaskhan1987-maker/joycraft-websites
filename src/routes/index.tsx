@@ -34,8 +34,8 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: "Bizness Doctor",
           url: SITE_URL,
-          email: "mobicosfinance@gmail.com",
-          telephone: "+447721991757",
+          email: "info@biznessdoctor.com",
+          telephone: "+971554725790",
           description:
             "Independent financial governance and risk structuring advisory for businesses and high-income professionals.",
           areaServed: ["AE", "AU", "International"],
