@@ -99,23 +99,24 @@ export function ContactPage() {
       <div className="mt-6 grid md:grid-cols-[1fr_1fr] gap-6">
         <div className="rounded-xl border border-border bg-card p-6 space-y-4">
           <h2 className="text-xl font-serif">Direct Enquiry</h2>
-          <a href="mailto:mobicosfinance@gmail.com" className="flex items-center gap-3 hover:text-navy">
+          <a href="mailto:info@biznessdoctor.com" className="flex items-center gap-3 hover:text-navy">
             <Mail className="size-5 text-accent" />
-            <span>mobicosfinance@gmail.com</span>
+            <span>info@biznessdoctor.com</span>
           </a>
-          <a href="tel:+447721991757" className="flex items-center gap-3 hover:text-navy">
+          <a href="tel:+971554725790" className="flex items-center gap-3 hover:text-navy">
             <Phone className="size-5 text-accent" />
-            <span>+44 7721 991757</span>
+            <span>+971-55-4725790</span>
           </a>
           <a
-            href="https://wa.me/447721991757?text=Hello%20Bizness%20Doctor%2C%20I'd%20like%20to%20book%20a%20fit%20call."
+            href="https://wa.me/971554725790?text=Hello%20Bizness%20Doctor%2C%20I'd%20like%20to%20book%20a%20fit%20call."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 hover:text-navy"
           >
             <MessageCircle className="size-5 text-[#25D366]" />
-            <span>WhatsApp +44 7721 991757</span>
+            <span>WhatsApp +971-55-4725790</span>
           </a>
+
 
           <div className="pt-4 border-t border-border">
             <p className="text-sm font-semibold">This conversation is relevant if:</p>
