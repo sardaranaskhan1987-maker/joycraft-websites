@@ -64,7 +64,7 @@ function ServicesPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-5">
-          <div id="cross-border" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
+          <div className="rounded-xl border border-border bg-card p-7">
             <h3 className="text-xl font-serif">Cross-Border &amp; Corporate Structuring</h3>
             <p className="text-muted-foreground mt-3 text-sm">
               Support for companies entering, expanding, or reorganizing across UAE and international
@@ -72,7 +72,8 @@ function ServicesPage() {
               structuring for Australian businesses establishing operations in the UAE.
             </p>
           </div>
-          <div id="risk-diagnostic" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
+          <div className="rounded-xl border border-border bg-card p-7">
+
             <h3 className="text-xl font-serif">UAE Financial Risk &amp; Tax Exposure Diagnostic</h3>
             <p className="text-muted-foreground mt-3 text-sm">
               A focused short-duration review for businesses needing early visibility into tax
