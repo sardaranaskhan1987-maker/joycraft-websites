@@ -33,48 +33,57 @@ function ServicesPage() {
         </h1>
       </header>
 
-      <div id="corporate-tax" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
-        <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-3">
-          Typical Starting Point
-        </span>
-        <h2 className="text-2xl font-serif">Corporate Tax &amp; VAT Governance</h2>
-        <p className="text-muted-foreground mt-3">
-          Strategic review of corporate tax readiness, VAT exposure, and governance controls across
-          operating structures, designed for businesses requiring oversight beyond filing and
-          compliance.
-        </p>
-        <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
-          {[
-            "Corporate tax readiness assessment",
-            "VAT exposure mapping",
-            "Compliance gap identification",
-            "Governance and documentation review",
-            "Risk visibility before issues become costly",
-          ].map((i) => (
-            <li key={i} className="flex gap-2"><span className="text-accent">•</span>{i}</li>
-          ))}
-        </ul>
-        <Link to="/contact" className="mt-5 inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm text-primary-foreground hover:opacity-90">Assess Tax Exposure</Link>
-      </div>
+      <section className="space-y-5 relative">
+        <span id="tax-governance" className="absolute -top-28" />
+        <span id="corporate-tax" className="absolute -top-28" />
+        <span id="cross-border" className="absolute -top-28" />
+        <span id="risk-diagnostic" className="absolute -top-28" />
+        <div className="rounded-xl border border-border bg-card p-7">
 
-      <div className="grid md:grid-cols-2 gap-5">
-        <div id="cross-border" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
-          <h3 className="text-xl font-serif">Cross-Border &amp; Corporate Structuring</h3>
-          <p className="text-muted-foreground mt-3 text-sm">
-            Support for companies entering, expanding, or reorganizing across UAE and international
-            markets, with focus on structure, tax implications, financial impact, and practical
-            structuring for Australian businesses establishing operations in the UAE.
+          <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-3">
+            Typical Starting Point
+          </span>
+          <h2 className="text-2xl font-serif">Corporate Tax &amp; VAT Governance</h2>
+          <p className="text-muted-foreground mt-3">
+            Strategic review of corporate tax readiness, VAT exposure, and governance controls across
+            operating structures, designed for businesses requiring oversight beyond filing and
+            compliance.
           </p>
+          <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
+            {[
+              "Corporate tax readiness assessment",
+              "VAT exposure mapping",
+              "Compliance gap identification",
+              "Governance and documentation review",
+              "Risk visibility before issues become costly",
+            ].map((i) => (
+              <li key={i} className="flex gap-2"><span className="text-accent">•</span>{i}</li>
+            ))}
+          </ul>
+          <Link to="/contact" className="mt-5 inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm text-primary-foreground hover:opacity-90">Assess Tax Exposure</Link>
         </div>
-        <div id="risk-diagnostic" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
-          <h3 className="text-xl font-serif">UAE Financial Risk &amp; Tax Exposure Diagnostic</h3>
-          <p className="text-muted-foreground mt-3 text-sm">
-            A focused short-duration review for businesses needing early visibility into tax
-            exposure, reporting weaknesses, control gaps, and working capital risk before broader
-            engagement.
-          </p>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <div className="rounded-xl border border-border bg-card p-7">
+            <h3 className="text-xl font-serif">Cross-Border &amp; Corporate Structuring</h3>
+            <p className="text-muted-foreground mt-3 text-sm">
+              Support for companies entering, expanding, or reorganizing across UAE and international
+              markets, with focus on structure, tax implications, financial impact, and practical
+              structuring for Australian businesses establishing operations in the UAE.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-7">
+
+            <h3 className="text-xl font-serif">UAE Financial Risk &amp; Tax Exposure Diagnostic</h3>
+            <p className="text-muted-foreground mt-3 text-sm">
+              A focused short-duration review for businesses needing early visibility into tax
+              exposure, reporting weaknesses, control gaps, and working capital risk before broader
+              engagement.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
+
 
       <div id="oversight-assessment" className="scroll-mt-28 rounded-xl bg-navy text-primary-foreground p-7">
         <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-3">
