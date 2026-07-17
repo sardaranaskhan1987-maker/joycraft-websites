@@ -33,8 +33,13 @@ function ServicesPage() {
         </h1>
       </header>
 
-      <section id="tax-governance" className="scroll-mt-28 space-y-5">
-        <div id="corporate-tax" className="scroll-mt-28 rounded-xl border border-border bg-card p-7">
+      <section className="space-y-5 relative">
+        <span id="tax-governance" className="absolute -top-28" />
+        <span id="corporate-tax" className="absolute -top-28" />
+        <span id="cross-border" className="absolute -top-28" />
+        <span id="risk-diagnostic" className="absolute -top-28" />
+        <div className="rounded-xl border border-border bg-card p-7">
+
           <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-3">
             Typical Starting Point
           </span>
