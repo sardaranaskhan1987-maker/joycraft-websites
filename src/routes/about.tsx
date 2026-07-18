@@ -37,14 +37,19 @@ function AboutPage() {
 
       <div className="mt-12 grid md:grid-cols-2 gap-6">
         <div className="rounded-xl border border-border bg-card p-7">
-          <h2 className="text-2xl font-serif">Not Accounting. Not Compliance. Not Product-Driven Advice.</h2>
+          <h2 className="text-2xl font-serif">Strategic Financial Leadership</h2>
           <p className="text-muted-foreground mt-3">
-            The advisory approach is built on governance, oversight, and structured financial
-            judgment rather than routine compliance or transaction-driven consulting.
+            For Better Business Decisions
           </p>
           <p className="text-muted-foreground mt-3">
-            Engagements are designed for situations where financial information exists, but clarity,
-            control, or confidence is limited.
+            Whether your business is experiencing rapid growth, cash flow pressure, governance challenges,
+            or increasing regulatory complexity, we provide independent financial leadership to improve
+            decision-making, strengthen financial controls, and support sustainable business growth.
+          </p>
+          <p className="text-muted-foreground mt-3">
+            Our services combine strategic finance, corporate governance, financial risk management,
+            cash flow optimisation, business structuring, and executive advisory tailored to your
+            organisation's needs.
           </p>
         </div>
 
@@ -52,7 +57,7 @@ function AboutPage() {
           <h2 className="text-2xl font-serif">Led by Senior Finance Leadership Experience</h2>
           <p className="text-muted-foreground mt-3">
             The practice is led by a senior finance professional with over 25 years of international
-            experience across the UAE, Saudi Arabia, Pakistan, and global markets.
+            experience across the UAE, Saudi Arabia, Pakistan, and cross-border markets.
           </p>
           <p className="text-muted-foreground mt-3">
             A Fellow Certified Practising Accountant (FCPA Australia), with specialization in UAE
@@ -77,9 +82,9 @@ function AboutPage() {
 
       <div className="mt-8 grid md:grid-cols-3 gap-4">
         {[
-          "Corporate tax and VAT exposure, financial reporting reliability, and control gap visibility",
-          "Cash flow discipline, working capital pressure, banking, and executive decision support",
-          "Cross-border structuring, independent review, and governance-focused financial oversight",
+          "Corporate tax and VAT governance, financial reporting reliability, internal controls, regulatory oversight, and executive financial governance",
+          "Cash flow optimisation, working capital management, banking relationships, budgeting, forecasting, and financial performance improvement",
+          "Cross-border business structuring, commercial finance, strategic advisory, business transformation, investment evaluation, and independent executive support",
         ].map((c) => (
           <div key={c} className="rounded-lg border border-border bg-card p-5 border-l-4 border-l-accent text-sm">
             {c}
