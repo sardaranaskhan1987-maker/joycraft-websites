@@ -32,6 +32,20 @@ const nav: NavItem[] = [
   },
   {
     type: "menu",
+    label: "Training",
+    columns: [
+      {
+        heading: "Programmes",
+        links: [
+          { to: "/training", hash: "executive-programme", label: "Executive Finance & Governance Programme", description: "Governance, reporting & decision-making" },
+          { to: "/training", hash: "career-programme", label: "Finance Career Accelerator Programme", description: "GCC national talent development" },
+          { to: "/training", hash: "custom-programmes", label: "Custom Corporate Programmes", description: "Tailored organisational learning" },
+        ],
+      },
+    ],
+  },
+  {
+    type: "menu",
     label: "Resources",
     columns: [
       {
@@ -43,6 +57,7 @@ const nav: NavItem[] = [
       },
     ],
   },
+
   { type: "link", to: "/about", label: "About" },
   { type: "link", to: "/contact", label: "Contact" },
 ];
