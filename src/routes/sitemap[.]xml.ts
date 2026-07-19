@@ -25,9 +25,9 @@ export const Route = createFileRoute("/sitemap.xml")({
             .eq("published", true)
             .order("published_at", { ascending: false })
             .limit(1000);
-          postUrls = (data ?? []).map((p) => ({
+          postUrls = ((data ?? []) as Array<{ slug: string; updated_at: string | null; published_at: string | null }>).map((p) => ({
             loc: `${SITE_URL}/blog/${p.slug}`,
-            lastmod: (p.updated_at ?? p.published_at) as string | undefined,
+            lastmod: p.updated_at ?? p.published_at ?? undefined,
           }));
         } catch (e) {
           console.error("sitemap blog fetch failed", e);
