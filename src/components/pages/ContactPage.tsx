@@ -219,7 +219,7 @@ export function ContactPage() {
             disabled={submitting}
             className="inline-flex items-center justify-center rounded-md bg-navy px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
           >
-            {submitting ? "Sending…" : "Send Enquiry"}
+            {submitting ? "Sending…" : "Request Consultation"}
           </button>
           <p className="text-xs text-muted-foreground">
             All discussions are treated with strict confidentiality. Independent financial advisory provided on a commission-free basis.
