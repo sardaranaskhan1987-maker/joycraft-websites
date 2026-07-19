@@ -60,7 +60,7 @@ function TrainingPage() {
         {/* Featured */}
         <article
           id="executive-programme"
-          className="scroll-mt-28 rounded-xl border border-border bg-card shadow-sm p-6 md:p-8"
+          className="scroll-mt-24 rounded-xl border border-border bg-card shadow-sm p-6 md:p-8"
         >
           <div className="grid gap-6 md:grid-cols-[112px_1fr] items-start">
             <div
