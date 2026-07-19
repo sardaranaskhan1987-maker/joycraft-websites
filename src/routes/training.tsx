@@ -112,10 +112,11 @@ function TrainingPage() {
         </article>
 
         {/* Supporting */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="relative grid md:grid-cols-2 gap-5">
+          <span id="career-programme" className="absolute -top-28" />
+          <span id="custom-programmes" className="absolute -top-28" />
           <article
-            id="career-programme"
-            className="scroll-mt-28 rounded-xl border border-border bg-card p-6 flex flex-col"
+            className="rounded-xl border border-border bg-card p-6 flex flex-col"
           >
             <h3 className="text-xl font-serif leading-tight">
               Finance Career Accelerator Programme
