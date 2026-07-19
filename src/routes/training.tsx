@@ -148,8 +148,7 @@ function TrainingPage() {
           </article>
 
           <article
-            id="custom-programmes"
-            className="scroll-mt-28 rounded-xl border border-border bg-card p-6 flex flex-col"
+            className="rounded-xl border border-border bg-card p-6 flex flex-col"
           >
             <h3 className="text-xl font-serif leading-tight">Custom Corporate Programmes</h3>
             <p className="text-muted-foreground mt-2 text-sm flex-grow">
