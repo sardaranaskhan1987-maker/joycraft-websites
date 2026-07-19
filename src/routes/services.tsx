@@ -130,8 +130,14 @@ function ServicesPage() {
       <div id="wealth-review" className="scroll-mt-28 rounded-xl border border-border bg-card p-5">
         <h3 className="text-xl font-serif leading-tight">Personal Wealth Risk &amp; Governance Review™</h3>
         <p className="text-muted-foreground mt-2 text-sm">
-          A discreet, independent review for high-income professionals seeking capital risk clarity
-          before committing to property, private ventures, or concentrated investment opportunities.
+          A discreet, independent advisory engagement for high-income professionals, business owners,
+          and investors seeking greater confidence before committing capital to property, private
+          ventures, family investments, or concentrated investment opportunities.
+        </p>
+        <p className="text-muted-foreground mt-2 text-sm">
+          The review focuses on financial visibility, governance considerations, risk concentration,
+          and decision support, providing an independent perspective before significant financial
+          commitments are made.
         </p>
       </div>
 
