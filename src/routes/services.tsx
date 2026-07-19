@@ -145,11 +145,11 @@ function ServicesPage() {
         </p>
         <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {[
-            ["P", "Profit Integrity", "Assessing margin quality, leakage, and reliability of reported performance."],
-            ["R", "Receivable & Cash Discipline", "Reviewing working capital strain, collections discipline, and cash visibility."],
-            ["I", "Internal Control Strength", "Identifying control gaps, weak approval environments, and governance blind spots."],
-            ["S", "Structural Risk Review", "Evaluating corporate structure, regulatory implications, and commercial alignment."],
-            ["M", "Monitoring & Tax Exposure", "Assessing tax readiness, compliance discipline, and monitoring strength."],
+            ["P", "Profit Integrity & Validation", "Assessing margin quality, financial leakage, and the reliability of reported business performance."],
+            ["R", "Receivable & Cash Discipline", "Reviewing working capital management, receivables discipline, collections, liquidity, and cash flow visibility."],
+            ["I", "Internal Control Strength", "Identifying control gaps, approval weaknesses, reporting deficiencies, and governance blind spots."],
+            ["S", "Structural Risk Review", "Evaluating corporate structure, tax implications, regulatory considerations, and commercial alignment."],
+            ["M", "Mitigation & Monitoring", "Developing practical risk mitigation actions and monitoring mechanisms to strengthen financial governance, improve accountability, and support informed management decisions."],
           ].map(([letter, title, body]) => (
             <div key={letter} className="rounded-lg bg-card border border-border p-4">
               <div className="size-9 rounded-full bg-navy text-primary-foreground inline-flex items-center justify-center font-bold mb-2">{letter}</div>
