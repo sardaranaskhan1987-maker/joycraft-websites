@@ -29,13 +29,19 @@ interface PublicPost {
   created_at: string;
 }
 
+let _admin: ReturnType<typeof createClient> | null = null;
+function getAdmin() {
+  if (_admin) return _admin;
+  _admin = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { persistSession: false },
+  });
+  return _admin;
+}
+
 export const fetchPostBySlug = createServerFn({ method: "GET" })
   .inputValidator((data: unknown) => z.object({ slug: z.string().min(1).max(200) }).parse(data))
   .handler(async ({ data }): Promise<PublicPost | null> => {
-    const SUPABASE_URL = process.env.SUPABASE_URL!;
-    const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const admin = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
-    const { data: post, error } = await admin
+    const { data: post, error } = await getAdmin()
       .from("blog_posts")
       .select("id, slug, title, excerpt, content, cover_image_url, published_at, created_at, published")
       .eq("slug", data.slug)

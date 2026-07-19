@@ -14,14 +14,18 @@ interface PostListItem {
   created_at: string;
 }
 
+let _admin: ReturnType<typeof createClient> | null = null;
+function getAdmin() {
+  if (_admin) return _admin;
+  _admin = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { persistSession: false },
+  });
+  return _admin;
+}
+
 export const fetchPublishedPosts = createServerFn({ method: "GET" }).handler(
   async (): Promise<PostListItem[]> => {
-    const SUPABASE_URL = process.env.SUPABASE_URL!;
-    const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const admin = createClient(SUPABASE_URL, SERVICE_ROLE, {
-      auth: { persistSession: false },
-    });
-    const { data, error } = await admin
+    const { data, error } = await getAdmin()
       .from("blog_posts")
       .select("id, slug, title, excerpt, cover_image_url, published_at, created_at")
       .eq("published", true)
