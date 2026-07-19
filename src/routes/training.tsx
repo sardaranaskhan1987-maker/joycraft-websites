@@ -28,7 +28,7 @@ function TrainingPage() {
     <div>
       {/* Hero */}
       <section className="bg-navy text-primary-foreground">
-        <div className="container-narrow py-12 md:py-16 max-w-3xl">
+        <div className="px-4 md:px-8 py-12 md:py-16 max-w-3xl">
           <span className="eyebrow text-accent">Executive Development</span>
           <h1 className="text-3xl md:text-5xl font-serif text-primary-foreground leading-tight mt-2">
             Training
@@ -60,7 +60,7 @@ function TrainingPage() {
         {/* Featured */}
         <article
           id="executive-programme"
-          className="scroll-mt-28 rounded-xl border border-border bg-card shadow-sm p-6 md:p-8"
+          className="scroll-mt-24 rounded-xl border border-border bg-card shadow-sm p-6 md:p-8"
         >
           <div className="grid gap-6 md:grid-cols-[112px_1fr] items-start">
             <div
@@ -112,10 +112,11 @@ function TrainingPage() {
         </article>
 
         {/* Supporting */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="relative grid md:grid-cols-2 gap-5">
+          <span id="career-programme" className="absolute -top-28" />
+          <span id="custom-programmes" className="absolute -top-28" />
           <article
-            id="career-programme"
-            className="scroll-mt-28 rounded-xl border border-border bg-card p-6 flex flex-col"
+            className="rounded-xl border border-border bg-card p-6 flex flex-col"
           >
             <h3 className="text-xl font-serif leading-tight">
               Finance Career Accelerator Programme
@@ -147,8 +148,7 @@ function TrainingPage() {
           </article>
 
           <article
-            id="custom-programmes"
-            className="scroll-mt-28 rounded-xl border border-border bg-card p-6 flex flex-col"
+            className="rounded-xl border border-border bg-card p-6 flex flex-col"
           >
             <h3 className="text-xl font-serif leading-tight">Custom Corporate Programmes</h3>
             <p className="text-muted-foreground mt-2 text-sm flex-grow">
