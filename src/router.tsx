@@ -60,7 +60,11 @@ export const getRouter = () => {
     context: {},
     scrollRestoration: true,
     defaultPreload: "intent",
-    defaultPreloadStaleTime: 0,
+    // Cache preloaded loader data so hover-prefetch turns into instant navigation
+    // instead of being discarded on click.
+    defaultPreloadStaleTime: 30_000,
+    defaultStaleTime: 30_000,
+    defaultGcTime: 5 * 60_000,
     defaultErrorComponent: DefaultErrorComponent,
   });
 
