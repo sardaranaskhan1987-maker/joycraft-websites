@@ -28,7 +28,7 @@ function TrainingPage() {
     <div>
       {/* Hero */}
       <section className="bg-navy text-primary-foreground">
-        <div className="container-narrow py-12 md:py-16 max-w-3xl">
+        <div className="px-4 md:px-8 py-12 md:py-16 max-w-3xl">
           <span className="eyebrow text-accent">Executive Development</span>
           <h1 className="text-3xl md:text-5xl font-serif text-primary-foreground leading-tight mt-2">
             Training
