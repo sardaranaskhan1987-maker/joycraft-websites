@@ -3,17 +3,23 @@ import { createClient } from "@supabase/supabase-js";
 
 const SITE_URL = "https://biznessdoctor.com";
 
+let _admin: ReturnType<typeof createClient> | null = null;
+function getAdmin() {
+  if (_admin) return _admin;
+  _admin = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { persistSession: false },
+  });
+  return _admin;
+}
+
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const staticPaths = ["/", "/about", "/services", "/insights", "/blog", "/contact"];
+        const staticPaths = ["/", "/about", "/services", "/training", "/insights", "/blog", "/contact"];
         let postUrls: { loc: string; lastmod?: string }[] = [];
         try {
-          const admin = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-            auth: { persistSession: false },
-          });
-          const { data } = await admin
+          const { data } = await getAdmin()
             .from("blog_posts")
             .select("slug, updated_at, published_at")
             .eq("published", true)
