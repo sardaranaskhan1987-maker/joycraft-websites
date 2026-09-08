@@ -139,7 +139,7 @@ function HomePage() {
       <section className="container-narrow py-10">
         <div className="max-w-3xl">
           <h2 className="text-2xl md:text-3xl font-serif leading-snug">
-            Independent Financial Advisory. Not Accounting. Not Product Sales.
+            Independent Financial Advisory | Not Accounting | Not Product Sales
           </h2>
           <p className="text-lg text-muted-foreground mt-4">
             Bizness Doctor provides governance-led financial advisory for clients who need
