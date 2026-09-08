@@ -11,7 +11,7 @@ export function Footer() {
         <div className="text-muted-foreground">
           <p>Email: <a className="hover:text-navy" href="mailto:info@biznessdoctor.com">info@biznessdoctor.com</a></p>
           <p>Tel: <a className="hover:text-navy" href="tel:+971554725790">+971-55-4725790</a></p>
-          <p>WhatsApp: <a className="hover:text-navy" href="https://wa.me/971554725790" target="_blank" rel="noopener">+971-55-4725790</a></p>
+          <p>WhatsApp: <a className="hover:text-navy" href="https://wa.me/447721991757" target="_blank" rel="noopener">+44 7721991757</a></p>
         </div>
 
         <div className="md:text-right text-muted-foreground space-y-1">
