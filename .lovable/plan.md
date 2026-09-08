@@ -1,26 +1,23 @@
-## Set up your blog admin account
+# Wording & Heading Clean-up
 
-I'll create a ready-to-use admin login so you can add, edit, and delete blog posts yourself. The edit and delete controls already exist in the admin dashboard — you just need an account with admin access.
+## Changes
 
-### Credentials I'll set up
-- **Login URL:** https://joycraft-websites.lovable.app/auth
-- **Email:** `admin@biznessdoctor.com`
-- **Temporary password:** `BiznessDoctor@2026`
+1. **About page — link text**
+   - Change the CEPA link text `(view submission)` to `(Official DFAT Submission)` in `src/routes/about.tsx`.
 
-You should change the password after first login (I can add a "Change password" screen if you'd like).
+2. **Remove dots from multi-part headings, use `|` as separator**
+   - About page H1: `Independent. Structured. Decision-Focused.` → `Independent | Structured | Decision-Focused`
+   - Home page H2: `Independent Financial Advisory. Not Accounting. Not Product Sales.` → `Independent Financial Advisory | Not Accounting | Not Product Sales`
+   - Services page H1: `Areas of advisory covering tax, oversight, governance, and capital risk.` → remove the trailing `.`
+   - Update the matching `og:title` meta on the About page.
 
-### What you'll be able to do
-Once logged in at `/auth`, you'll be redirected to `/admin` where you can:
-- **Create** new blog posts (title, slug, cover image, markdown content, inline images)
-- **Edit** any existing post
-- **Publish / Unpublish** posts with one click
-- **Delete** posts (with confirmation prompt)
-- View contact form submissions
+No other pages, cards, or layouts change.
 
-### Steps
-1. Create the auth user `admin@biznessdoctor.com` with the password above (email auto-confirmed so you can log in immediately).
-2. Assign the `admin` role to that user in the `user_roles` table so the admin dashboard unlocks.
-3. No code changes needed — the admin UI, edit, and delete features are already built.
+## Where the contact form submissions go (answering your question)
 
-### After approval
-I'll share the final login link + credentials in chat. If you'd prefer a different email or password, tell me and I'll use those instead.
+When someone clicks **Request Consultation**:
+- The submission is saved in your website's database (table: contact submissions).
+- You can view every submission at **/admin/submissions** after signing in at **/auth** with `admin@biznessdoctor.com` / `Saleem@Bizness123`.
+- It can also be forwarded automatically to a Google Sheet, but that needs the Google Apps Script webhook URL to be added as a secret first — currently it is not set, so submissions only go to the database.
+
+Optional follow-up (not in this plan): if you give me the Google Sheet webhook URL, I can connect the form so every enquiry also lands in your Sheet/email.
