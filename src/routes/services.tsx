@@ -29,7 +29,7 @@ function ServicesPage() {
       <header className="max-w-3xl">
         <span className="eyebrow">Services</span>
         <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-2">
-          Areas of advisory covering tax, oversight, governance, and capital risk.
+          Areas of advisory covering tax, oversight, governance, and capital risk
         </h1>
       </header>
 

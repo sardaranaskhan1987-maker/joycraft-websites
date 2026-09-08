@@ -11,7 +11,7 @@ export const Route = createFileRoute("/about")({
         content:
           "Senior finance leadership with 25+ years across UAE, KSA, Pakistan and global markets. FCPA Australia, CEPA contributor, governance-led advisory.",
       },
-      { property: "og:title", content: "About Bizness Doctor — Independent. Structured. Decision-Focused." },
+      { property: "og:title", content: "About Bizness Doctor — Independent | Structured | Decision-Focused" },
       {
         property: "og:description",
         content: "Independent governance advisory led by senior finance leadership.",
@@ -27,7 +27,7 @@ function AboutPage() {
     <article className="container-narrow py-10">
       <header className="max-w-3xl">
         <span className="eyebrow">About Bizness Doctor</span>
-        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">Independent. Structured. Decision-Focused.</h1>
+        <h1 className="text-3xl md:text-4xl font-serif leading-tight tracking-tight mt-4">Independent | Structured | Decision-Focused</h1>
         <p className="text-lg text-muted-foreground mt-4">
           Bizness Doctor is an independent financial governance advisory practice focused on helping
           businesses, owners, and professionals gain clarity over tax exposure, financial control,
@@ -73,7 +73,7 @@ function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              view submission
+              Official DFAT Submission
             </a>
             ).
           </p>
