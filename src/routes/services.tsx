@@ -82,27 +82,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      <div id="oversight-assessment" className="scroll-mt-28 rounded-xl bg-navy text-primary-foreground p-5">
-        <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-2">
-          Premium Engagement
-        </span>
-        <h3 className="text-2xl font-serif text-primary-foreground leading-tight">
-          Independent Financial Oversight Assessment™
-        </h3>
-        <p className="text-primary-foreground/80 mt-2 text-sm md:text-base">
-          A structured independent review for owners, investors, minority shareholders, and boards
-          seeking visibility into leakage, control weakness, fraud indicators, and governance blind
-          spots.
-        </p>
-        <p className="text-primary-foreground/80 mt-2 text-sm md:text-base">
-          Delivered through the <strong>PRISM™ Governance Framework</strong> for situations
-          requiring deeper financial integrity review and risk protection.
-        </p>
-        <Link to="/contact" className="mt-4 inline-flex items-center rounded-md border border-primary-foreground/30 bg-transparent px-4 py-2 text-sm text-primary-foreground hover:bg-primary-foreground/10">
-          Request Oversight Assessment
-        </Link>
-      </div>
-
       <div id="fractional-cfo" className="scroll-mt-28 rounded-xl border border-border bg-secondary p-5">
         <span className="inline-block rounded-full border border-navy/30 text-navy text-xs font-bold px-3 py-1 mb-2">
           Retainer Model
@@ -139,6 +118,27 @@ function ServicesPage() {
           and decision support, providing an independent perspective before significant financial
           commitments are made.
         </p>
+      </div>
+
+      <div id="oversight-assessment" className="scroll-mt-28 rounded-xl bg-navy text-primary-foreground p-5">
+        <span className="inline-block rounded-full bg-accent text-navy text-xs font-bold px-3 py-1 mb-2">
+          Premium Engagement
+        </span>
+        <h3 className="text-2xl font-serif text-primary-foreground leading-tight">
+          Independent Financial Oversight Assessment™
+        </h3>
+        <p className="text-primary-foreground/80 mt-2 text-sm md:text-base">
+          A structured independent review for owners, investors, minority shareholders, and boards
+          seeking visibility into leakage, control weakness, fraud indicators, and governance blind
+          spots.
+        </p>
+        <p className="text-primary-foreground/80 mt-2 text-sm md:text-base">
+          Delivered through the <strong>PRISM™ Governance Framework</strong> for situations
+          requiring deeper financial integrity review and risk protection.
+        </p>
+        <Link to="/contact" className="mt-4 inline-flex items-center rounded-md border border-primary-foreground/30 bg-transparent px-4 py-2 text-sm text-primary-foreground hover:bg-primary-foreground/10">
+          Request Oversight Assessment
+        </Link>
       </div>
 
       {/* PRISM */}
