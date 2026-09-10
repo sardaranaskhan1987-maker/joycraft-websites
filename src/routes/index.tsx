@@ -1,6 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import skynetLogo from "@/assets/client-skynet.png.asset.json";
+import nmfLogo from "@/assets/client-nmf.png.asset.json";
+import khsLogo from "@/assets/client-khs.png.asset.json";
 
 const SITE_URL = "https://biznessdoctor.com";
+
+const clients = [
+  { name: "Skynet Global Logistics", logo: skynetLogo.url },
+  { name: "NMF Services", logo: nmfLogo.url },
+  { name: "KHS Pakistan / Conservio", logo: khsLogo.url },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
