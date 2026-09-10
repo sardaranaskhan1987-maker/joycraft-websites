@@ -16,7 +16,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const staticPaths = ["/", "/about", "/services", "/training", "/insights", "/blog", "/contact"];
+        const staticPaths = ["/", "/about", "/services", "/training", "/blog", "/contact"];
         let postUrls: { loc: string; lastmod?: string }[] = [];
         try {
           const { data } = await getAdmin()

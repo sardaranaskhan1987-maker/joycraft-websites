@@ -17,7 +17,7 @@ export function Footer() {
         <div className="md:text-right text-muted-foreground space-y-1">
           <div className="flex md:justify-end gap-4">
             <Link to="/services" className="hover:text-navy">Services</Link>
-            <Link to="/insights" className="hover:text-navy">Insights</Link>
+            
             <Link to="/blog" className="hover:text-navy">Blog</Link>
             <Link to="/contact" className="hover:text-navy">Contact</Link>
           </div>

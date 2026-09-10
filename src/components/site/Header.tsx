@@ -44,19 +44,8 @@ const nav: NavItem[] = [
       },
     ],
   },
-  {
-    type: "menu",
-    label: "Resources",
-    columns: [
-      {
-        heading: "Knowledge",
-        links: [
-          { to: "/insights", label: "Insights", description: "Articles on governance & risk" },
-          { to: "/blog", label: "Blog", description: "Latest publications" },
-        ],
-      },
-    ],
-  },
+  { type: "link", to: "/blog", label: "Blog" },
+
 
   { type: "link", to: "/about", label: "About" },
   { type: "link", to: "/contact", label: "Contact" },
