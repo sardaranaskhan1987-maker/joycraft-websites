@@ -144,6 +144,32 @@ function HomePage() {
         </aside>
       </section>
 
+      {/* Client logos */}
+      <section className="border-y border-border bg-card overflow-hidden">
+        <div className="container-narrow py-6 md:py-8">
+          <p className="eyebrow text-center mb-4 md:mb-5">Our Clients</p>
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-card to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-card to-transparent z-10" />
+            <div className="flex animate-marquee w-max">
+              {[...clients, ...clients, ...clients, ...clients].map((client, i) => (
+                <div
+                  key={`${client.name}-${i}`}
+                  className="flex items-center justify-center h-16 md:h-20 px-6 md:px-10"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-full max-w-[140px] md:max-w-[180px] object-contain grayscale hover:grayscale-0 transition duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Positioning */}
       <section className="container-narrow py-10">
         <div className="max-w-3xl">
