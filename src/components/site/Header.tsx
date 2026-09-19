@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type SVGProps } from "react";
+import logoAsset from "@/assets/bizness-doctor-logo.png.asset.json";
 
 type NavLink = { to: string; hash?: string; label: string; description?: string };
 type NavItem =
