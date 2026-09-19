@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type SVGProps } from "react";
-import logoAsset from "@/assets/bizness-doctor-logo.png.asset.json";
 
 type NavLink = { to: string; hash?: string; label: string; description?: string };
 type NavItem =
@@ -65,7 +64,7 @@ export function Header() {
       <div className="container-narrow flex items-center justify-between py-5 gap-6">
         <Link to="/" className="flex items-center gap-3" onClick={close}>
           <img
-            src={logoAsset.url}
+            src="/favicon.png"
             alt="Bizness Doctor logo"
             className="h-11 w-11 object-contain shrink-0"
           />
