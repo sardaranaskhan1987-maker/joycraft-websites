@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type SVGProps } from "react";
+import logoAsset from "@/assets/bizness-doctor-logo.png.asset.json";
 
 type NavLink = { to: string; hash?: string; label: string; description?: string };
 type NavItem =
@@ -62,10 +63,17 @@ export function Header() {
   return (
     <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-40">
       <div className="container-narrow flex items-center justify-between py-5 gap-6">
-        <Link to="/" className="flex flex-col leading-tight" onClick={close}>
-          <span className="font-serif text-xl text-navy font-semibold">Bizness Doctor</span>
-          <span className="text-xs text-muted-foreground hidden sm:block">
-            Financial Governance &amp; Risk Structuring Advisory
+        <Link to="/" className="flex items-center gap-3" onClick={close}>
+          <img
+            src={logoAsset.url}
+            alt="Bizness Doctor logo"
+            className="h-11 w-11 object-contain shrink-0"
+          />
+          <span className="flex flex-col leading-tight">
+            <span className="font-serif text-xl text-navy font-semibold">Bizness Doctor</span>
+            <span className="text-xs text-muted-foreground hidden sm:block">
+              Financial Governance &amp; Risk Structuring Advisory
+            </span>
           </span>
         </Link>
 

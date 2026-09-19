@@ -1,11 +1,19 @@
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/bizness-doctor-logo.png.asset.json";
 
 export function Footer() {
   return (
     <footer className="mt-20 border-t border-border bg-card/40">
       <div className="container-narrow py-10 grid gap-6 md:grid-cols-3 text-sm">
         <div>
-          <div className="font-serif text-lg text-navy font-semibold">Bizness Doctor</div>
+          <div className="flex items-center gap-2.5">
+            <img
+              src={logoAsset.url}
+              alt="Bizness Doctor logo"
+              className="h-9 w-9 object-contain shrink-0"
+            />
+            <div className="font-serif text-lg text-navy font-semibold">Bizness Doctor</div>
+          </div>
           <p className="text-muted-foreground mt-1">Financial Governance &amp; Risk Structuring Advisory</p>
         </div>
         <div className="text-muted-foreground">
