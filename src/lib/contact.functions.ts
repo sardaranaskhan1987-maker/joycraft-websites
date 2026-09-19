@@ -15,9 +15,15 @@ export type ContactInput = z.infer<typeof ContactSchema>;
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => ContactSchema.parse(data))
   .handler(async ({ data }) => {
-    const SUPABASE_URL = process.env.SUPABASE_URL!;
-    const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const admin = createClient(SUPABASE_URL, SERVICE_ROLE, {
+    const supabaseUrl = process.env["SUPABASE_URL"] || import.meta.env.VITE_SUPABASE_URL;
+    const serviceRole = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+
+    if (!supabaseUrl || !serviceRole) {
+      console.error("contact submission backend configuration is unavailable");
+      throw new Error("Contact service is temporarily unavailable");
+    }
+
+    const admin = createClient(supabaseUrl, serviceRole, {
       auth: { persistSession: false },
     });
 
@@ -42,7 +48,7 @@ export const submitContact = createServerFn({ method: "POST" })
     }
 
     // Optionally forward to Google Apps Script webhook (linked to a Google Sheet)
-    const webhook = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+    const webhook = process.env["GOOGLE_SHEET_WEBHOOK_URL"];
     if (webhook) {
       try {
         const res = await fetch(webhook, {
