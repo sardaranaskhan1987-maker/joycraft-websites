@@ -160,7 +160,7 @@ function HomePage() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="max-h-full max-w-[140px] md:max-w-[180px] object-contain grayscale hover:grayscale-0 transition duration-300"
+                    className="max-h-full max-w-[140px] md:max-w-[180px] object-contain"
                     loading="lazy"
                   />
                 </div>
