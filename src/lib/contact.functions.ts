@@ -15,22 +15,23 @@ export type ContactInput = z.infer<typeof ContactSchema>;
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => ContactSchema.parse(data))
   .handler(async ({ data }) => {
-    const supabaseUrl = process.env["SUPABASE_URL"] || import.meta.env.VITE_SUPABASE_URL;
-    const serviceRole = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+    const supabaseUrl =
+      process.env["SUPABASE_URL"] ||
+      import.meta.env.VITE_SUPABASE_URL ||
+      "https://imcveonylfefpcfwukiu.supabase.co";
+    const publishableKey =
+      process.env["SUPABASE_PUBLISHABLE_KEY"] ||
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltY3Zlb255bGZlZnBjZnd1a2l1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MjE1ODIsImV4cCI6MjA5MjQ5NzU4Mn0.sK8mpXNaQLk47tfaKWeyVkri-n190pTp3Sa4gP8tjnY";
 
-    if (!supabaseUrl || !serviceRole) {
-      console.error("contact submission backend configuration is unavailable");
-      throw new Error("Contact service is temporarily unavailable");
-    }
-
-    const admin = createClient(supabaseUrl, serviceRole, {
+    const contactClient = createClient(supabaseUrl, publishableKey, {
       auth: { persistSession: false },
     });
 
     const phone = data.phone?.trim() || null;
     const subject = data.subject?.trim() || null;
 
-    const { data: inserted, error } = await admin
+    const { error } = await contactClient
       .from("contact_submissions")
       .insert({
         name: data.name.trim(),
@@ -38,9 +39,7 @@ export const submitContact = createServerFn({ method: "POST" })
         phone,
         subject,
         message: data.message.trim(),
-      })
-      .select("id")
-      .single();
+      });
 
     if (error) {
       console.error("contact insert failed", error);
@@ -49,7 +48,8 @@ export const submitContact = createServerFn({ method: "POST" })
 
     // Optionally forward to Google Apps Script webhook (linked to a Google Sheet)
     const webhook = process.env["GOOGLE_SHEET_WEBHOOK_URL"];
-    if (webhook) {
+    const serviceRole = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+    if (webhook && serviceRole) {
       try {
         const res = await fetch(webhook, {
           method: "POST",
@@ -64,10 +64,7 @@ export const submitContact = createServerFn({ method: "POST" })
           }),
         });
         if (res.ok) {
-          await admin
-            .from("contact_submissions")
-            .update({ forwarded_to_sheet: true })
-            .eq("id", inserted.id);
+          console.info("contact submission forwarded to sheet");
         } else {
           console.error("Sheet webhook non-OK:", res.status, await res.text());
         }
