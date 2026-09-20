@@ -8,6 +8,13 @@
       "when": 1789892423093,
       "tag": "0000_restore_public_contact_form_submissions",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789892953336,
+      "tag": "0001_whatsapp_alerts",
+      "breakpoints": true
     }
   ]
 }
