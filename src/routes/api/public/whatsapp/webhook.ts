@@ -89,7 +89,12 @@ export const Route = createFileRoute("/api/public/whatsapp/webhook")({
               ? new Date(Number(status.timestamp) * 1000).toISOString()
               : new Date().toISOString();
 
-            const update: Record<string, unknown> = {
+            const update: {
+              provider_timestamp: string;
+              updated_at: string;
+              state?: string;
+              error?: string;
+            } = {
               provider_timestamp: ts,
               updated_at: new Date().toISOString(),
             };
