@@ -20,14 +20,16 @@ export const Route = createFileRoute("/api/public/whatsapp/webhook")({
 
         let body: string;
         try {
-          const verified = await verifyWebhookRequest(request, {
+          const verified = await verifyWebhookRequest({
+            req: request,
             secret,
             maxBodyBytes: 4 * 1024 * 1024,
           });
-          body = typeof verified === "string" ? verified : await request.text();
+          body = verified.body;
         } catch {
           return new Response("Invalid signature", { status: 401 });
         }
+
 
         const deliveryId = request.headers.get("X-Lovable-Delivery");
         const event = request.headers.get("X-Lovable-Event");

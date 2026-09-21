@@ -31,7 +31,7 @@ export const submitContact = createServerFn({ method: "POST" })
     const phone = data.phone?.trim() || null;
     const subject = data.subject?.trim() || null;
 
-    const { error } = await contactClient
+    const { data: inserted, error } = await contactClient
       .from("contact_submissions")
       .insert({
         name: data.name.trim(),
@@ -39,12 +39,42 @@ export const submitContact = createServerFn({ method: "POST" })
         phone,
         subject,
         message: data.message.trim(),
-      });
+      })
+      .select("id")
+      .maybeSingle();
 
     if (error) {
       console.error("contact insert failed", error);
       throw new Error("Failed to save submission");
     }
+
+    // Notify the business owner on WhatsApp (never blocks the submission).
+    try {
+      const { isWhatsAppConfigured, sendEnquiryAlert } = await import("./whatsapp.server");
+      if (isWhatsAppConfigured()) {
+        const result = await sendEnquiryAlert({
+          name: data.name.trim(),
+          contact: [data.email.trim(), phone].filter(Boolean).join(" / "),
+          summary: [subject, data.message.trim()].filter(Boolean).join(" — "),
+        });
+
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        await supabaseAdmin.from("whatsapp_notifications").insert({
+          submission_id: inserted?.id ?? null,
+          recipient: result.recipient,
+          provider_message_id: result.ok ? result.messageId : null,
+          state: result.ok ? "accepted" : "failed",
+          error: result.ok ? null : result.error,
+        });
+
+        if (!result.ok) {
+          console.error("WhatsApp enquiry alert failed", result.error);
+        }
+      }
+    } catch (e) {
+      console.error("WhatsApp alert step failed", e);
+    }
+
 
     // Optionally forward to Google Apps Script webhook (linked to a Google Sheet)
     const webhook = process.env["GOOGLE_SHEET_WEBHOOK_URL"];
